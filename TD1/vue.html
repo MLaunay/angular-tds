@@ -12,13 +12,12 @@
 	<body ng-controller="NoteController as noteCtrl">
 		<textarea ng-change="noteCtrl.count()" ng-model="noteCtrl.messageNote"></textarea><br/>
 		<button> Enregistrer </button>
-		<button> Effacer </button>
+		<button ng-click="noteCtrl.clear()"> Effacer </button>
 		<div>
 			<p> Nombres de caractères restants : {{noteCtrl.count()}}</p>
 		</div>
-		<div>
+		<div ng-model="noteCtrl.status">
 			<p>Note {{noteCtrl.status}}</p>
 		</div>
 	</body>
-
 </html> 

@@ -15,7 +15,6 @@ angular.module("NoteApp").controller("NoteController",['$cookies', function($coo
 		this.status = 0;
 	};
 	this.count = function(){
-		
 		return 100 - this.messageNote.length;;
 	};
 	this.save = function(){

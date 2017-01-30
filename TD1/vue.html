@@ -4,7 +4,7 @@
 <title>Note </title>
 <meta charset="UTF8" >
 		<title> First AngularJS </title>
-		<link rel="stylesheet" href="style.css" />
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.1/angular.min.js"></script>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.1/angular-cookies.min.js"></script>
 		
@@ -13,14 +13,19 @@
 </head>
 
 	<body ng-controller="NoteController as noteCtrl">
-		<textarea ng-change="noteCtrl.modifie()" ng-model="noteCtrl.messageNote" rows="20" cols="75"></textarea><br/>
+	<div ng-view="" class="toggle ng-scope" style="">
+	<div class="panel panel-primary">
+	<div class="panel-heading">Ex 1 : Note Application</div>
+		<textarea ng-change="noteCtrl.modifie()" ng-model="noteCtrl.messageNote" rows="10" cols="300" maxlength=100></textarea><br/><br/>
 		<button ng-click="noteCtrl.save()"> Enregistrer </button>
-		<button ng-click="noteCtrl.clear()"> Effacer </button>
-		<div ng-class="{'orange' : noteCtrl.count() < 20, 'rouge' : noteCtrl.count() < 10 }">
+		<button ng-click="noteCtrl.clear()"> Effacer </button> <br/><br/>
+		<div ng-class="{'alert-info' : noteCtrl.count() <= 100,'alert-warning' : noteCtrl.count() < 20, 'alert-danger' : noteCtrl.count() < 10 }">
 			<p> Nombres de caractères restants : {{noteCtrl.count()}}</p>
-		</div>
-		<div ng-show="noteCtrl.status == 5" ng-model="noteCtrl.info">
+		</div></br>
+		<div ng-class="{'alert-success' : noteCtrl.info == 'Note sauvegardée', 'alert-info' : noteCtrl.info == 'Note modifiée' }" ng-show="noteCtrl.status == 5" ng-model="noteCtrl.info">
 			<p>{{noteCtrl.info}}</p>
-		</div>
+		</div><br/>
+	</div>	
+	</div>
 	</body>
 </html> 

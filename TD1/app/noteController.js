@@ -12,6 +12,7 @@ angular.module("NoteApp").controller("NoteController",['$cookies', function($coo
 	
 	this.clear = function(){
 		this.messageNote = "";
+		this.status = 0;
 	};
 	this.count = function(){
 		
@@ -20,6 +21,7 @@ angular.module("NoteApp").controller("NoteController",['$cookies', function($coo
 	this.save = function(){
 		if (this.count() >= 0){
             $cookies.put('message', this.messageNote);
+			this.status = 5;
             this.info = "Note sauvegardée";
             
         }
@@ -27,6 +29,7 @@ angular.module("NoteApp").controller("NoteController",['$cookies', function($coo
 	};
 	this.modifie = function(){
 		if(this.messageNote != this.saved){
+			this.status = 5;
 			this.info = "Note modifiée";
 		}
 	};

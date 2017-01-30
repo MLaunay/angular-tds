@@ -4,20 +4,23 @@
 <title>Note </title>
 <meta charset="UTF8" >
 		<title> First AngularJS </title>
+		<link rel="stylesheet" href="style.css" />
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.1/angular.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.1/angular-cookies.min.js"></script>
+		
 		<script src="app/noteApp.js"> </script>
 		<script src="app/noteController.js"></script>		
 </head>
 
 	<body ng-controller="NoteController as noteCtrl">
-		<textarea ng-change="noteCtrl.count()" ng-model="noteCtrl.messageNote"></textarea><br/>
-		<button> Enregistrer </button>
+		<textarea ng-change="noteCtrl.modifie()" ng-model="noteCtrl.messageNote"></textarea><br/>
+		<button ng-click="noteCtrl.save()"> Enregistrer </button>
 		<button ng-click="noteCtrl.clear()"> Effacer </button>
-		<div>
+		<div ng-class="{'orange' : noteCtrl.count() < 20, 'rouge' : noteCtrl.count() < 10 }">
 			<p> Nombres de caractères restants : {{noteCtrl.count()}}</p>
 		</div>
-		<div ng-model="noteCtrl.status">
-			<p>Note {{noteCtrl.status}}</p>
+		<div ng-model="noteCtrl.info">
+			<p>{{noteCtrl.info}}</p>
 		</div>
 	</body>
 </html> 

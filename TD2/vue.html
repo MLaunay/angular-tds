@@ -1,0 +1,46 @@
+ <!DOCTYPE html>
+<html ng-app="ServicesApp">
+<head>
+<title>Services Application</title>
+<meta charset="UTF8" >
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+		<link rel="stylesheet" href="style.css">
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.1/angular.min.js"></script>
+		
+		<script src="app/servicesApp.js"> </script>
+		<script src="app/servicesController.js"></script>		
+</head>
+
+<body ng-controller="ServicesController as srvCtrl">
+	<h2> Services </h2>
+	<div class="alert alert-info">
+		<p>Choisissez les éléments à inclure</p>
+		<ng-pluralize count="srvCtrl.nbServices()"
+                when="{'0': 'Aucun service sélectionné',
+                       '1': '1 service selectionné',
+                       'other': '{} services sélectionnés'}">
+		</ng-pluralize><br>
+	</div>
+	
+	<div ng-repeat="service in srvCtrl.services"> 
+		<div ng-click = "srvCtrl.toggleActive(service)" >
+				<ul>
+				<li class="ng-binding ng-scope" ng-class="{'active' :service.active,'nonactive' : !service.active}" > {{service.name}} {{service.price | currency}} </li>
+				</ul>
+		</div>
+	</div>
+	<div class="total">
+		<p > Total : {{srvCtrl.total() | currency}}
+	</div>
+	<div>
+		<input type="checkbox" >
+		<input type="text" placeholder="Code promo">
+	</div>
+	
+	<div ng-model ="checked" ng-show="checked">
+		<p> Remise : </p>
+		<p> Total avec remise : </p>
+	</div>
+</body>
+
+</html> 

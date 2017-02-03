@@ -19,7 +19,7 @@ angular.module("NoteApp").controller("NoteController",['$cookies', function($coo
 	};
 	this.save = function(){
 		if (this.count() >= 0){
-            $cookies.put('message', this.messageNote);
+            $cookies.put("message", this.messageNote);
 			this.status = 5;
             this.info = "Note sauvegardée";
             

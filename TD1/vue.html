@@ -17,8 +17,8 @@
 	<div class="panel panel-primary">
 	<div class="panel-heading">Ex 1 : Note Application</div>
 		<textarea ng-change="noteCtrl.modifie()" ng-model="noteCtrl.messageNote" rows="10" cols="300" maxlength=100></textarea><br/><br/>
-		<button ng-click="noteCtrl.save()"> Enregistrer </button>
-		<button ng-click="noteCtrl.clear()"> Effacer </button> <br/><br/>
+		<button class="btn btn-primary" ng-click="noteCtrl.save()"> Enregistrer </button>
+		<button class="btn btn-primary" ng-click="noteCtrl.clear()"> Effacer </button> <br/><br/>
 		<div ng-class="{'alert-info' : noteCtrl.count() <= 100,'alert-warning' : noteCtrl.count() < 20, 'alert-danger' : noteCtrl.count() < 10 }">
 			<p> Nombres de caractères restants : {{noteCtrl.count()}}</p>
 		</div></br>

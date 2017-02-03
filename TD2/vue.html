@@ -33,11 +33,11 @@
 		<p > Total : {{srvCtrl.total() | currency}}
 	</div>
 	<div>
-		<input type="checkbox" >
-		<input type="text" placeholder="Code promo">
+		<input type="checkbox" ng-model="checked">
+		<input type="text" placeholder="Code promo" ng-model = "srvCtrl.codePromo" ng-change="srvCtrl.remise()">
 	</div>
 	
-	<div ng-model ="checked" ng-show="checked">
+	<div ng-show="checked" >
 		<p> Remise : </p>
 		<p> Total avec remise : </p>
 	</div>

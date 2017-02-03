@@ -1,6 +1,10 @@
-angular.module("ServicesApp").controller("ServicesController",function(){
+angular.module("ServicesApp").controller("ServicesController",["$http",function($http){
+	this.promos ="";
 	
-	this.codepromo = false;
+	$http.get("promos.json").success(function(data) {
+		this.promos = data;
+	}); 
+	
 	
 	this.services = [
 		{
@@ -25,6 +29,10 @@ angular.module("ServicesApp").controller("ServicesController",function(){
 		}
 	];
 	
+	this.remise = function(){
+		
+		
+	};
 	
 	this.nbServices = function(){
 		var cpt = 0;

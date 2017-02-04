@@ -1,9 +1,14 @@
 angular.module("ServicesApp").controller("ServicesController",["$http",function($http){
-	this.promos ="";
+	var self = this;
 	
-	$http.get("promos.json").success(function(data) {
-		this.promos = data;
-	}); 
+	self.promos = "";
+	
+	$http.get("promos.json").then(function(data) {
+		self.promos = data;
+	});
+	
+
+	this.codePromo = "";	
 	
 	
 	this.services = [
@@ -29,10 +34,7 @@ angular.module("ServicesApp").controller("ServicesController",["$http",function(
 		}
 	];
 	
-	this.remise = function(){
-		
-		
-	};
+	this.TotalRemise = 0;
 	
 	this.nbServices = function(){
 		var cpt = 0;
@@ -62,5 +64,24 @@ angular.module("ServicesApp").controller("ServicesController",["$http",function(
 		$service.active = !$service.active;
 	};
 	
+	this.remise = function(){
+		var str = this.codePromo;
+		
+		if(str != ""){
+			if(self.promos.data[str] != undefined){
+				this.TotalRemise = this.total()*(1-self.promos.data[str]).toFixed(7);
+				console.log(this.TotalRemise);
+				return (this.total() * self.promos.data[str]).toFixed(2); 
+			
+			}
+			else {
+				this.TotalRemise = "";
+				return "Code Promo invalide";
+			}
+		}
+		
+		
+	}
 	
-});
+	
+}]);

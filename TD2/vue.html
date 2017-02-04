@@ -32,14 +32,16 @@
 	<div class="total">
 		<p > Total : {{srvCtrl.total() | currency}}
 	</div>
-	<div>
+	<div class="input-group">
+      <span class="input-group-addon">
 		<input type="checkbox" ng-model="checked">
-		<input type="text" placeholder="Code promo" ng-model = "srvCtrl.codePromo" ng-change="srvCtrl.remise()">
-	</div>
+	  </span>
+      <input type="text" class="form-control" placeholder="Code promo" ng-model = "srvCtrl.codePromo" ng-change="srvCtrl.remise()">
+    </div>
 	
-	<div ng-show="checked" >
-		<p> Remise : </p>
-		<p> Total avec remise : </p>
+	<div class ="total" ng-show="checked&&srvCtrl.codePromo" class="input-group">
+		<p> Remise : {{srvCtrl.remise()}} </p>
+		<p> Total avec remise : {{srvCtrl.TotalRemise}} </p>
 	</div>
 </body>
 

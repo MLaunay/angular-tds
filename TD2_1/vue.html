@@ -1,0 +1,34 @@
+ <!DOCTYPE html>
+<html ng-app="ListesApp">
+<head>
+<title>Services Application</title>
+<meta charset="UTF8" >
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.1/angular.min.js"></script>
+		
+		<script src="app/listesApp.js"> </script>
+		<script src="app/listesController.js"></script>		
+</head>
+
+
+
+
+<body ng-controller="ListesController as lstCtrl">
+
+<select size = "8" multiple ng-model="lstCtrl.selectedDispoItems" ng-options="item.title for item in lstCtrl.dispoItems">
+</select>
+
+<button ng-click="lstCtrl.addToIncluded()"> Ajouter 1 </button>
+<button ng-click="lstCtrl.addAllToIncluded()"> Ajouter tout </button>
+<button> Retirer 1 </button>
+<button> Retirer tout </button>
+
+<select size="8" multiple ng-model="lstCtrl.selectedIncludedItems" ng-options="item.title for item in lstCtrl.includedItems">
+</select>
+
+<input type="button" value="Etape Suivante"> 
+
+
+</body>
+
+</html> 

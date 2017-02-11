@@ -1,0 +1,58 @@
+ <!DOCTYPE html>
+<html ng-app="ListesApp">
+<head>
+<title>Services Application</title>
+<meta charset="UTF8" >
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.1/angular.min.js"></script>
+		
+		<script src="app/listesApp.js"> </script>
+		<script src="app/listesController.js"></script>		
+</head>
+
+
+
+
+<body ng-controller="ListesController as lstCtrl">
+
+<div class="form-group" ng-show="lstCtrl.step == 1">
+
+<div class="inline-block">
+<p> Produits disponibles </p>
+<select size = "8" multiple ng-model="lstCtrl.selectedDispoItems" ng-options="item.title for item in lstCtrl.dispoItems">
+</select><br/>
+<ng-pluralize count="lstCtrl.includedItems.length" when="{0: 'Aucun produit à inclure',
+												  1: '1 produit inclus',
+												  other : '{} produits inclus'}"></ng-pluralize>
+</div>												  
+<div class="inline-block">
+<button ng-disabled="lstCtrl.selectedDispoItems.length==0" ng-click="lstCtrl.addToIncluded()"> Ajouter 1 </button>
+<button ng-click="lstCtrl.addAllToIncluded()"> Ajouter tout </button>
+<button ng-disabled="lstCtrl.selectedIncludedItems.length==0" ng-click="lstCtrl.removeFromIncluded()"> Retirer 1 </button>
+<button ng-disabled="lstCtrl.includedItems.length==0" ng-click="lstCtrl.RemoveAllFromIncluded()"> Retirer tout </button>
+</div>
+
+<div class="inline-block">
+<select size="8" multiple ng-model="lstCtrl.selectedIncludedItems" ng-options="item.title for item in lstCtrl.includedItems">
+</select><br/>
+</div>
+
+<input ng-click="lstCtrl.step=2" ng-disabled="lstCtrl.includedItems.length==0" type="button" value="Etape Suivante"> 
+
+
+</div>
+
+
+<div ng-show="lstCtrl.step==2">
+	<p>Votre choix</p>
+	<div ng-repeat = "item in lstCtrl.includedItems">
+		<img ng-src="{{item.image}}"/>
+		<a href="item.url">{{item.title}}</a>
+	</div>
+</div>
+
+
+
+</body>
+
+</html> 

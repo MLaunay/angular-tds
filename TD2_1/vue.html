@@ -15,6 +15,7 @@
 
 <body ng-controller="ListesController as lstCtrl">
 
+<<<<<<< HEAD
 <div class="form-group" ng-show="lstCtrl.step == 1">
 
 <div class="inline-block">
@@ -51,6 +52,20 @@
 	</div>
 </div>
 
+=======
+<select size = "8" multiple ng-model="lstCtrl.selectedDispoItems" ng-options="item.title for item in lstCtrl.dispoItems">
+</select>
+
+<button ng-click="lstCtrl.addToIncluded()"> Ajouter 1 </button>
+<button ng-click="lstCtrl.addAllToIncluded()"> Ajouter tout </button>
+<button> Retirer 1 </button>
+<button> Retirer tout </button>
+
+<select size="8" multiple ng-model="lstCtrl.selectedIncludedItems" ng-options="item.title for item in lstCtrl.includedItems">
+</select>
+
+<input type="button" value="Etape Suivante"> 
+>>>>>>> 86683aa16734fa7891671a3827abc52af13cbb62
 
 
 </body>

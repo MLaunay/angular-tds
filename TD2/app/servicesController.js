@@ -75,9 +75,10 @@ angular.module("ServicesApp").controller("ServicesController",["$http",function(
 			
 			}
 			else {
-				this.TotalRemise = "";
-				return "Code Promo invalide";
+				this.TotalRemise = this.total();
+				return -2;
 			}
+			
 		}
 		
 		

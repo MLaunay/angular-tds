@@ -40,8 +40,9 @@
     </div>
 	
 	<div class ="total" ng-show="checked&&srvCtrl.codePromo" class="input-group">
-		<p> Remise : {{srvCtrl.remise()}} </p>
-		<p> Total avec remise : {{srvCtrl.TotalRemise}} </p>
+		<p ng-if="srvCtrl.remise() > 0"> Remise : {{srvCtrl.remise() | currency}} </p>
+		<p ng-if="srvCtrl.remise() == -2">Remise : Code Promo Invalide </p>
+		<p> Total avec remise : {{srvCtrl.TotalRemise | currency}} </p>
 	</div>
 </body>
 

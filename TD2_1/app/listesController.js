@@ -47,21 +47,13 @@ angular.module("ListesApp").controller("ListesController",function(){
 	
 	self.selectedIncludedItems = [];
 	
-<<<<<<< HEAD
 	self.step = 1;
-=======
-	self.step = 0;
->>>>>>> 86683aa16734fa7891671a3827abc52af13cbb62
 	
 	self.addToIncluded = function(){
 
 		
 		for(var i = 0; i<self.selectedDispoItems.length;i++){
 			self.includedItems.push(self.selectedDispoItems[i]);
-<<<<<<< HEAD
-=======
-			
->>>>>>> 86683aa16734fa7891671a3827abc52af13cbb62
 			self.dispoItems.splice(self.dispoItems.indexOf(self.selectedDispoItems[i]),1);
 			
 		}
@@ -74,20 +66,16 @@ angular.module("ListesApp").controller("ListesController",function(){
 	
 	self.removeFromIncluded = function(){
 		
-<<<<<<< HEAD
 		for(var i = 0; i<self.selectedIncludedItems.length;i++){
 			self.dispoItems.push(self.selectedIncludedItems[i]);
 			self.includedItems.splice(self.includedItems.indexOf(self.selectedIncludedItems[i]),1);
 		}
 		
 		
-=======
->>>>>>> 86683aa16734fa7891671a3827abc52af13cbb62
 	};
 	
 	self.RemoveAllFromIncluded = function(){
 		
-<<<<<<< HEAD
 		self.includedItems.push.apply(self.dispoItems,self.includedItems);
 		self.includedItems=[];
 		
@@ -96,9 +84,4 @@ angular.module("ListesApp").controller("ListesController",function(){
 	
 	
 	
-=======
-		
-	};
-	
->>>>>>> 86683aa16734fa7891671a3827abc52af13cbb62
 });

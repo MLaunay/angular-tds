@@ -19,7 +19,7 @@
 
 <div class="inline-block">
 <p> Produits disponibles </p>
-<select size = "8" multiple ng-model="lstCtrl.selectedDispoItems" ng-options="item.title for item in lstCtrl.dispoItems">
+<select size = "8" multiple ng-model="lstCtrl.selectedDispoItems" ng-dblclick ="lstCtrl.addToIncluded()" ng-options="item.title for item in lstCtrl.dispoItems">
 </select><br/>
 <ng-pluralize count="lstCtrl.includedItems.length" when="{0: 'Aucun produit à inclure',
 												  1: '1 produit inclus',
@@ -33,7 +33,7 @@
 </div>
 
 <div class="inline-block">
-<select size="8" multiple ng-model="lstCtrl.selectedIncludedItems" ng-options="item.title for item in lstCtrl.includedItems">
+<select size="8" multiple ng-model="lstCtrl.selectedIncludedItems" ng-dblclick ="lstCtrl.removeFromIncluded()" ng-options="item.title for item in lstCtrl.includedItems">
 </select><br/>
 </div>
 

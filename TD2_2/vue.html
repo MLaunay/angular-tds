@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html ng-app="ContactApp">
+<head>
+<title>Appli contacts</title>
+<meta charset="UTF8" >
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.1/angular.min.js"></script>
+		
+		<script src="app/ContactApp.js"> </script>
+		<script src="app/contactController.js"></script>	
+</head>
+
+<body ng-controller="ContactController as conCtrl">
+
+	<input type="text" placeholder ="Filtrer ..."/>
+
+	<table class="table">
+		<tr ng-repeat = "item in conCtrl.contacts">
+			<td>{{item.nom}}</td>
+			<td>{{item.prenom}}</td>
+			<td>{{item.mail}}</td>
+			<td><a ng-click="conCtrl.toUpdate(item)">[...]</a></td>
+			<td><a ng-click="conCtrl.delete(item)">[X]</a></td>
+		</tr>
+	</table>
+	<button ng-click="conCtrl.toAdd()">Ajouter ...</button>
+	<br/><br/><br/>
+	
+	<div ng-show="conCtrl.operation=='ajout'&&conCtrl.edit==true">
+		<h3>Ajouter un contact</h3>
+		<input ng-model="conCtrl.tmpContact.nom" type="text" placeholder ="Entrer un nom ..." />
+		<input ng-model="conCtrl.tmpContact.prenom" type="text" placeholder ="Prénom ..."/>
+		<input ng-model="conCtrl.tmpContact.mail" placeholder ="Adresse e-mail ..." type="email" required/>
+		<button ng-click="conCtrl.update()">Valider</button>
+		<button ng-click="conCtrl.edit=false">Annuler</button>
+	
+	</div>
+	
+	
+	
+	<div ng-show="conCtrl.operation=='modification'&&conCtrl.edit==true">
+		<h3>Modifier un contact</h3>
+		<input ng-model="conCtrl.contact.nom" type="text" />
+		<input ng-model="conCtrl.contact.prenom" type="text" />
+		<input ng-model="conCtrl.contact.mail" type="email" required />
+		<button ng-click="conCtrl.update()">Valider</button>
+		<button ng-click="conCtrl.edit=false">Annuler</button>
+	</div>
+	
+	
+	
+	<ng-pluralize count="conCtrl.contacts.length" when="{0: 'Aucun résultat',
+														 1: '1 contact trouvé',
+														 other: '{} contacts trouvés' }"></ng-pluralize>
+</body>
+
+</html>

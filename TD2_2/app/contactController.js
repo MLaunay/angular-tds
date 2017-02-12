@@ -32,6 +32,7 @@ angular.module("ContactApp").controller("ContactController",function(){
 	
 	self.notDeleted = self.contacts.slice();
 	
+	
 	self.nbDeleted = 0;
 	
 	self.contact = null; //contact à modifier
@@ -92,7 +93,8 @@ angular.module("ContactApp").controller("ContactController",function(){
 	self.cancelDeletions = function(){
 		self.nbDeleted = 0;
 		self.notDeleted = self.contacts.slice();
-	}
+	};
 	
+
 	
 });

@@ -12,10 +12,10 @@
 
 <body ng-controller="ContactController as conCtrl">
 
-	<input type="text" placeholder ="Filtrer ..."/>
+	<input type="text" placeholder ="Filtrer ..." ng-model="test"/>
 
 	<table class="table">
-		<tr ng-repeat = "item in conCtrl.notDeleted">
+		<tr ng-repeat = "item in conCtrl.notDeleted | filter:test">
 			<td>{{item.nom}}</td>
 			<td>{{item.prenom}}</td>
 			<td>{{item.mail}}</td>

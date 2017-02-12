@@ -15,7 +15,7 @@
 	<input type="text" placeholder ="Filtrer ..."/>
 
 	<table class="table">
-		<tr ng-repeat = "item in conCtrl.contacts">
+		<tr ng-repeat = "item in conCtrl.notDeleted">
 			<td>{{item.nom}}</td>
 			<td>{{item.prenom}}</td>
 			<td>{{item.mail}}</td>
@@ -24,6 +24,7 @@
 		</tr>
 	</table>
 	<button ng-click="conCtrl.toAdd()">Ajouter ...</button>
+	<button ng-show ="conCtrl.nbDeleted>0" ng-click="conCtrl.cancelDeletions()">Annuler supressions ({{conCtrl.nbDeleted}})</button>
 	<br/><br/><br/>
 	
 	<div ng-show="conCtrl.operation=='ajout'&&conCtrl.edit==true">

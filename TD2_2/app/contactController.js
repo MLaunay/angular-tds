@@ -1,3 +1,6 @@
+
+
+
 angular.module("ContactApp").controller("ContactController",function(){
 
 	self = this;
@@ -8,21 +11,28 @@ angular.module("ContactApp").controller("ContactController",function(){
 			"nom" : "QUIEDEVILLE",
 			"prenom" : "Valentin",
 			"mail" : "valentin.quiedeville@gmail.com",
+			"deleted" : false
 			
 		},
 		{
 			"nom" : "LUCAS",
 			"prenom" : "Clément",
 			"mail" : "clement.lucas@gmail.com",
+			"deleted" : false
 			
 		},
 		{
 			"nom" : "BASNIER",
 			"prenom" : "Paul",
-			"mail" : "paul.basnier@gmail.com"
+			"mail" : "paul.basnier@gmail.com",
+			"deleted" : false
 			
 		}
 	];
+	
+	self.notDeleted = self.contacts.slice();
+	
+	self.nbDeleted = 0;
 	
 	self.contact = null; //contact à modifier
 	
@@ -71,13 +81,18 @@ angular.module("ContactApp").controller("ContactController",function(){
 	};
 	
 	self.delete = function(contact){
-		var position = self.contacts.indexOf(contact);
-		contact.deleted = true;
-		self.contacts.splice(position,1)
+		self.nbDeleted++;
+		var position = self.notDeleted.indexOf(contact);
+		console.log(position);
+		self.notDeleted.splice(position,1);
+		console.log(self.notDeleted);
+		console.log(self.contacts);
 	};
 	
-
-
-
-
+	self.cancelDeletions = function(){
+		self.nbDeleted = 0;
+		self.notDeleted = self.contacts.slice();
+	}
+	
+	
 });

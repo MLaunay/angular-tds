@@ -1,7 +1,7 @@
 angular.module("ContactApp").directive("contactElem",function(){
 	return {
 		restrict : 'EA',
-		template: "<td>{{contact.nom}}</td><td>{{contact.prenom}}</td><td>{{contact.mail}}</td><td><a ng-click='update(contact)'>[...]</a></td><td><a ng-click='delete(contact)'>[X]</a></td>",		   
+		templateUrl: "app/templateTableau.html",		   
 	    scope: {contact:'=',update:'&',delete:'&'}
 	
 }});

@@ -1,3 +1,13 @@
+angular.module("ContactApp").filter("notDeleted",function(){
+	return function(items){
+		var tabRetour = [];
+		for(var i=0; i<items.length;i++){
+			if(!items[i].deleted){
+				tabRetour.push(items[i]);
+			}
+		}
+		return tabRetour;
+}});
 
 
 
@@ -30,7 +40,6 @@ angular.module("ContactApp").controller("ContactController",function(){
 		}
 	];
 	
-	self.notDeleted = self.contacts.slice();
 	
 	
 	self.nbDeleted = 0;
@@ -44,6 +53,7 @@ angular.module("ContactApp").controller("ContactController",function(){
 	self.edit = false;
 	
 	self.index = null;
+	
 	
 	self.toUpdate = function(contact){
 		self.tmpContact = Object.assign({},contact);
@@ -59,7 +69,6 @@ angular.module("ContactApp").controller("ContactController",function(){
 	
 	self.add = function(){
 		self.contacts.push(self.tmpContact);
-		self.notDeleted = self.contacts.slice();
 		self.tmpContact = undefined;
 		
 	};
@@ -68,8 +77,7 @@ angular.module("ContactApp").controller("ContactController",function(){
 		console.log("Je suis dans update");
 		if(self.operation == "modification"){
 			console.log("Je suis dans modif");
-			self.contacts[self.index] = self.contact;
-			self.notDeleted = self.contacts.slice();
+			self.contacts[self.index] = self.tmpContact;
 			self.edit = false;
 			self.operation = null;
 			
@@ -85,16 +93,15 @@ angular.module("ContactApp").controller("ContactController",function(){
 	
 	self.delete = function(contact){
 		self.nbDeleted++;
-		var position = self.notDeleted.indexOf(contact);
-		console.log(position);
-		self.notDeleted.splice(position,1);
-		console.log(self.notDeleted);
+		contact.deleted = true;
 		console.log(self.contacts);
 	};
 	
 	self.cancelDeletions = function(){
 		self.nbDeleted = 0;
-		self.notDeleted = self.contacts.slice();
+		for(var i = 0; i<self.contacts.length;i++){
+			self.contacts[i].deleted = false;
+		}
 	};
 	
 

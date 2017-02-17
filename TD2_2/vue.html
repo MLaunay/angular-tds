@@ -13,19 +13,24 @@
 
 <body ng-controller="ContactController as conCtrl">
 
-	<input type="text" placeholder ="Filtrer ..." ng-model="test"/>
+	<input class="form-control" type="text" placeholder ="Filtrer ..." ng-model="q"/>
 
-	<table class="table">
-		<tr ng-repeat = "item in conCtrl.notDeleted" contact-elem contact="item" update="conCtrl.toUpdate(item)" delete="conCtrl.delete(item)">
+	<table class="table table-striped">
+		<tr>
+			<th> Nom </th>
+			<th> Prénom </th>
+			<th> Adresse e-mail </th>
+			<th colspan="2"> Actions </th> 
+		</tr>
+		<tr ng-repeat = "item in conCtrl.contacts |notDeleted |filter: q as results" contact-elem contact="item" update="conCtrl.toUpdate(item)" delete="conCtrl.delete(item)">
 		
 		
 		</tr>
 		
 	</table>
-	<button ng-click="conCtrl.toAdd()">Ajouter ...</button>
+	<button class="btn btn-primary" ng-click="conCtrl.toAdd()">Ajouter ...</button>
 	<button ng-show ="conCtrl.nbDeleted>0" ng-click="conCtrl.cancelDeletions()">Annuler supressions ({{conCtrl.nbDeleted}})</button>
 	<br/><br/><br/>
-	
 	<div ng-show="conCtrl.operation=='ajout'&&conCtrl.edit==true">
 		<h3>Ajouter un contact</h3>
 		<div frm-contact contact="conCtrl.tmpContact" update="conCtrl.update()" edit="conCtrl.edit">
@@ -43,9 +48,9 @@
 	
 	<div ng-show="conCtrl.operation=='modification'&&conCtrl.edit==true">
 		<h3>Modifier un contact</h3>
-		<!--<div frm-contact contact="conCtrl.tmpContact" update="conCtrl.update()" edit="conCtrl.edit">
+		<div frm-contact contact="conCtrl.tmpContact" update="conCtrl.update()" edit="conCtrl.edit">
 		</div>
-		<input ng-model="conCtrl.tmpContact.nom" type="text" />
+		<!--<input ng-model="conCtrl.tmpContact.nom" type="text" />
 		<input ng-model="conCtrl.tmpContact.prenom" type="text" />
 		<input ng-model="conCtrl.tmpContact.mail" type="email" required />
 		<button ng-click="conCtrl.update()">Valider</button>
@@ -55,7 +60,7 @@
 	
 	
 	
-	<ng-pluralize count="conCtrl.notDeleted.length" when="{0: 'Aucun résultat',
+	<ng-pluralize count="results.length" when="{0: 'Aucun résultat',
 														 1: '1 contact trouvé',
 														 other: '{} contacts trouvés' }"></ng-pluralize>
 </body>

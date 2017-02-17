@@ -8,6 +8,7 @@
 		
 		<script src="app/ContactApp.js"> </script>
 		<script src="app/contactController.js"></script>	
+		<script src="app/directives.js"></script>	
 </head>
 
 <body ng-controller="ContactController as conCtrl">
@@ -15,13 +16,11 @@
 	<input type="text" placeholder ="Filtrer ..." ng-model="test"/>
 
 	<table class="table">
-		<tr ng-repeat = "item in conCtrl.notDeleted | filter:test">
-			<td>{{item.nom}}</td>
-			<td>{{item.prenom}}</td>
-			<td>{{item.mail}}</td>
-			<td><a ng-click="conCtrl.toUpdate(item)">[...]</a></td>
-			<td><a ng-click="conCtrl.delete(item)">[X]</a></td>
+		<tr ng-repeat = "item in conCtrl.notDeleted" contact-elem contact="item" update="conCtrl.toUpdate(item)" delete="conCtrl.delete(item)">
+		
+		
 		</tr>
+		
 	</table>
 	<button ng-click="conCtrl.toAdd()">Ajouter ...</button>
 	<button ng-show ="conCtrl.nbDeleted>0" ng-click="conCtrl.cancelDeletions()">Annuler supressions ({{conCtrl.nbDeleted}})</button>
@@ -29,11 +28,14 @@
 	
 	<div ng-show="conCtrl.operation=='ajout'&&conCtrl.edit==true">
 		<h3>Ajouter un contact</h3>
-		<input ng-model="conCtrl.tmpContact.nom" type="text" placeholder ="Entrer un nom ..." />
+		<div frm-contact contact="conCtrl.tmpContact" update="conCtrl.update()" edit="conCtrl.edit">
+		</div>
+		<!--<input ng-model="conCtrl.tmpContact.nom" type="text" placeholder ="Entrer un nom ..." />
 		<input ng-model="conCtrl.tmpContact.prenom" type="text" placeholder ="Prénom ..."/>
 		<input ng-model="conCtrl.tmpContact.mail" placeholder ="Adresse e-mail ..." type="email" required/>
 		<button ng-click="conCtrl.update()">Valider</button>
-		<button ng-click="conCtrl.edit=false">Annuler</button>
+		<button ng-click="conCtrl.edit=false">Annuler</button>-->
+		
 	
 	</div>
 	
@@ -41,16 +43,19 @@
 	
 	<div ng-show="conCtrl.operation=='modification'&&conCtrl.edit==true">
 		<h3>Modifier un contact</h3>
-		<input ng-model="conCtrl.contact.nom" type="text" />
-		<input ng-model="conCtrl.contact.prenom" type="text" />
-		<input ng-model="conCtrl.contact.mail" type="email" required />
+		<!--<div frm-contact contact="conCtrl.tmpContact" update="conCtrl.update()" edit="conCtrl.edit">
+		</div>
+		<input ng-model="conCtrl.tmpContact.nom" type="text" />
+		<input ng-model="conCtrl.tmpContact.prenom" type="text" />
+		<input ng-model="conCtrl.tmpContact.mail" type="email" required />
 		<button ng-click="conCtrl.update()">Valider</button>
-		<button ng-click="conCtrl.edit=false">Annuler</button>
+		<button ng-click="conCtrl.edit=false">Annuler</button>-->
+		
 	</div>
 	
 	
 	
-	<ng-pluralize count="conCtrl.contacts.length" when="{0: 'Aucun résultat',
+	<ng-pluralize count="conCtrl.notDeleted.length" when="{0: 'Aucun résultat',
 														 1: '1 contact trouvé',
 														 other: '{} contacts trouvés' }"></ng-pluralize>
 </body>

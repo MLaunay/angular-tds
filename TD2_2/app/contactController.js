@@ -46,7 +46,7 @@ angular.module("ContactApp").controller("ContactController",function(){
 	self.index = null;
 	
 	self.toUpdate = function(contact){
-		self.contact = Object.assign({},contact);
+		self.tmpContact = Object.assign({},contact);
 		self.index = self.contacts.indexOf(contact);
 		self.operation = "modification";
 		self.edit = true;
@@ -59,6 +59,7 @@ angular.module("ContactApp").controller("ContactController",function(){
 	
 	self.add = function(){
 		self.contacts.push(self.tmpContact);
+		self.notDeleted = self.contacts.slice();
 		self.tmpContact = undefined;
 		
 	};
@@ -68,6 +69,7 @@ angular.module("ContactApp").controller("ContactController",function(){
 		if(self.operation == "modification"){
 			console.log("Je suis dans modif");
 			self.contacts[self.index] = self.contact;
+			self.notDeleted = self.contacts.slice();
 			self.edit = false;
 			self.operation = null;
 			

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html ng-app="ConvertisseurApp">
+<head>
+<title>Convertisseur</title>
+<meta charset="UTF8" >
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.1/angular.min.js"></script>
+		
+		<script src="app/ConvertisseurApp.js"> </script>
+		<script src="app/ConvertisseurController.js"></script>	
+</meta>
+</head>
+
+<body ng-controller="ConvertisseurController as convCtrl">
+
+<input type="text" name="what" value="1">
+
+<select ng-options="v.code+' - '+v.name for (k,v) in convCtrl.currencies" ng-model="convCtrl.from"></select>
+<button ng-click="convCtrl.swap()"> <==> </button>
+<select ng-options="v.code+' - '+v.name for (k,v) in convCtrl.currencies" ng-model="convCtrl.to">
+
+</select>
+
+<button name="convert" ng-click="convCtrl.getResult()">Convertir</button>
+<input type="text" name="taux" value="{{convCtrl.result}}" disabled>
+
+<input type="checkbox" name="historique"> Historique <br/>
+
+<table>
+	<th> De </th>
+	<th> En </th>
+	<th> Tx </th>
+	<th> Montant </th>
+	<th> Date </th>
+	<th> Delta </th>
+</table>
+
+</body>
+
+</html> 

@@ -1,6 +1,8 @@
-angular.module("ConvertisseurApp").controller("ConvertisseurController",['$http', function($http){
+angular.module("ConvertisseurApp").controller("ConvertisseurController",['$http', 'ConvertisseurService',function($http,$service){
 
 	self = this;
+	self.service = $service;
+	self.historique = [];
 	
 	$http.get('app/data/currencymap.json').
     then(function(response) {
@@ -12,24 +14,29 @@ angular.module("ConvertisseurApp").controller("ConvertisseurController",['$http'
         console.log("Erreur avec le statut Http : "+response.status);
     });
 	
-	self.what;
+	self.what = 1;
 	self.result;
+
 	
 	self.getResult = function(){
 		$http.jsonp('https://free.currencyconverterapi.com/api/v3/convert?compact=y&q='+self.from.code+'_'+self.to.code, {jsonpCallbackParam: 'callback'})
 		.then(function(response) {
         self.result=response.data[self.from.code+'_'+self.to.code].val;
 		
+		self.service.update(self.from,self.to,self.what,0,self.result);
+		self.historique = $service.historique;
 	});
 		
 	};
 	
 	self.swap = function(){
-		self.what = self.from;
+		var tmp = self.from;
 		self.from = self.to;
-		self.to = self.what;
+		self.to = tmp;
 		
 	};
+	
+	
 	
 	
 

@@ -1,28 +1,33 @@
-
-angular.module("ConvertisseurApp").service("ConvertisseurService",['$http', function($http){
+angular.module("ConvertisseurApp").service("ConvertisseurService", function(){
 
 	self = this;
-	
-	
 	
 	self.historique = [];
 	
 	self.update = function(from,to,what,hasHisto,result){
 		
+		var tx = result/what;
 		
-	};
-	
-	var conversion={from : //monnaie1, 
-        to : //monnaie2,    
-        amount : function(){ //retourne le montant (tx* somme) }, 
-        initialAmount : function(){ //Retoune le montant avec tx initial * somme},
-        delta : //écart Avec première requête (tx actuel - tx initial) * somme 
-        rate : //tx actuel, 
-        what : //Somme, date : //date & heure de la requête, 
-        update: //Flag pour "en cours de mise à jour" (requête ajax), 
-        initialRate : //tx initial  : invariant depuis la première requête
+		var conversion={from : from, 
+        to : to,
+		rate : tx, 
+        amount : function(){ return this.rate*this.what; }, 
+        initialAmount : function(){ return this.initialRate*this.rate;},
+        delta : this.rate-this.initialRate,
+        what : what, 
+		date : new Date(),
+        update: 1, 
+        initialRate : tx
         };
 		
+		var search = from.code+'_'+to.code;
+		if(self.historique[search]){
+			self.historique[search].date = new Date();
+			self.historique[search].rate = tx;
+		}else{
+			self.historique[search]=conversion;
+			console.log(self.historique);
+		}		
+	};
 	
-	
-}]);
+});

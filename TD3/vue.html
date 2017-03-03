@@ -8,12 +8,13 @@
 		
 		<script src="app/ConvertisseurApp.js"> </script>
 		<script src="app/ConvertisseurController.js"></script>	
+		<script src="app/ConvertisseurService.js"></script>	
 </meta>
 </head>
 
 <body ng-controller="ConvertisseurController as convCtrl">
 
-<input type="text" name="what" value="1">
+<input type="text" name="what" ng-model="convCtrl.what">
 
 <select ng-options="v.code+' - '+v.name for (k,v) in convCtrl.currencies" ng-model="convCtrl.from"></select>
 <button ng-click="convCtrl.swap()"> <==> </button>
@@ -24,16 +25,23 @@
 <button name="convert" ng-click="convCtrl.getResult()">Convertir</button>
 <input type="text" name="taux" value="{{convCtrl.result}}" disabled>
 
-<input type="checkbox" name="historique"> Historique <br/>
+<input type="checkbox" name="historique" ng-model="isChecked"> Historique <br/>
 
-<table>
+<table ng-show="isChecked">
+	<tr>
 	<th> De </th>
 	<th> En </th>
 	<th> Tx </th>
 	<th> Montant </th>
 	<th> Date </th>
 	<th> Delta </th>
-</table>
+	</tr>
+	
+	<tr ng-repeat = "item in convCtrl.historique">
+	{{item.amount}}
+	</tr>
+	
+	</table>
 
 </body>
 

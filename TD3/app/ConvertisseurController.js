@@ -1,7 +1,6 @@
 angular.module("ConvertisseurApp").controller("ConvertisseurController",['$http', 'ConvertisseurService',function($http,$service){
 
 	self = this;
-	self.service = $service;
 	self.historique = [];
 	
 	$http.get('app/data/currencymap.json').
@@ -22,8 +21,7 @@ angular.module("ConvertisseurApp").controller("ConvertisseurController",['$http'
 		$http.jsonp('https://free.currencyconverterapi.com/api/v3/convert?compact=y&q='+self.from.code+'_'+self.to.code, {jsonpCallbackParam: 'callback'})
 		.then(function(response) {
         self.result=response.data[self.from.code+'_'+self.to.code].val;
-		
-		self.service.update(self.from,self.to,self.what,0,self.result);
+		$service.update(self.from,self.to,self.what,0,self.result);
 		self.historique = $service.historique;
 	});
 		

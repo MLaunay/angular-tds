@@ -38,15 +38,15 @@
 	<th colspan="2"></th>
 	</tr>
 	
-	<tr ng-repeat="(k,v) in convCtrl.historique">
+	<tr ng-repeat="(k,v) in convCtrl.historique" ng-class="{danger: v.delta < 0 , success: v.delta > 0 }">
 	<td>{{v.from.code}}</td>
 	<td>{{v.to.code}}</td>
-	<td>{{v.tx}}</td>
+	<td>{{v.rate}}</td>
 	<td>{{v.amount()}}</td>
 	<td>{{v.date}}</td>
 	<td>{{v.delta()}}</td>
 	<td><button class="btn btn-info" data-ng-click="convCtrl.getResult()"><span class="glyphicon glyphicon-refresh" aria-hidden="true"></span></button></td>
-	<td><button class="btn btn-danger" data-ng-click="convCtrl.delete(v)"><span class="glyphicon glyphicon-remove-circle" aria-hidden="true"></span></button></td>
+	<td><button class="btn btn-danger" data-ng-click="convCtrl.delete(k)"><span class="glyphicon glyphicon-remove-circle" aria-hidden="true"></span></button></td>
 	</tr>
 	
 	</table>

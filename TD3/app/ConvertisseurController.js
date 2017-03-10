@@ -1,7 +1,7 @@
 angular.module("ConvertisseurApp").controller("ConvertisseurController",['$http', 'ConvertisseurService',function($http,$service){
 
 	self = this;
-	self.historique = [];
+	self.historique = $service.historique;
 	
 	$http.get('app/data/currencymap.json').
     then(function(response) {
@@ -22,7 +22,6 @@ angular.module("ConvertisseurApp").controller("ConvertisseurController",['$http'
 		.then(function(response) {
         self.result=response.data[self.from.code+'_'+self.to.code].val;
 		$service.update(self.from,self.to,self.what,0,self.result);
-		self.historique = $service.historique;
 	});
 		
 	};
@@ -33,6 +32,10 @@ angular.module("ConvertisseurApp").controller("ConvertisseurController",['$http'
 		self.to = tmp;
 		
 	};
+	
+	self.delete = function(key){
+		delete self.historique[key];
+	}
 	
 	
 	

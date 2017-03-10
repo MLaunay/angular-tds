@@ -2,51 +2,37 @@ angular.module("ConvertisseurApp").service("ConvertisseurService", function(){
 
 	self = this;
 	
-	self.historique = [];
+	self.historique = {};
 	
 	self.update = function(from,to,what,hasHisto,result){
-		console.log("Je suis dans update");
+		
 		var tx = result/what;
 		
 		var conversion={from : from, 
         to : to,
 		rate : tx, 
         amount : function(){ return this.rate*this.what; }, 
-        initialAmount : function(){ return this.initialRate*this.rate;},
-        delta : this.rate-this.initialRate,
+        initialAmount : function(){ return this.initialRate*amount();},
+        delta : function() {return this.rate-this.initialRate;},
         what : what, 
-		date : new Date(),
+		date : new Date().toLocaleString(),
         update: 1, 
         initialRate : tx
         };
+		console.log("delta = "+conversion.delta);
+		var key = self.from.code+'_'+self.to.code;
 		
-		if(self.historique.length == 0){
-			self.historique.push(conversion);
+		if(self.historique[key]){
+			console.log("J'existe déjà");
+			self.historique[key].date = new Date().toLocaleString();
+			self.historique[key].delta = conversion.delta;
+			self.historique[key].rate = tx;
 		}
 		else {
+			console.log("Je n'existe pas déjà");
+			self.historique[key] = conversion;
 			console.table(self.historique);
-			var i = 0;
-			while(i<self.historique.length && !(self.historique[i].from == conversion.from && self.historique[i].to == conversion.to)){
-				i++;
-			}
-		
-			if(self.historique[i].from == conversion.from && self.historique[i].to == conversion.to){
-				self.historique[i].date = new Date();
-				self.historique[i].delta = conversion.delta;
-				self.historique[i].rate = tx;
-			}
-			else {
-				self.historique.push(conversion);
-			}
-		
-			console.log(self.historique);
-			
-			
 		}
-		
-		
-		
-		
 		
 	};
 	

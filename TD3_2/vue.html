@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html ng-app="CalculatriceApp">
+<head>
+<title>Calculatrice</title>
+<meta charset="UTF8" >
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.1/angular.min.js"></script>
+		
+		<script src="app/CalculatriceApp.js"> </script>
+		<script src="app/CalculatriceController.js"></script>	
+		<script src="app/CalculatriceService.js"></script>	
+		<script src="app/directives.js"></script>	
+</meta>
+</head>
+
+<body ng-controller="CalculatriceController as calcCtrl">
+<div>
+	<p></p>
+	<p></p>
+</div>
+<div ng-model="calcCtrl.operation">
+	<input type="button" value="(" ng-click="calcCtrl.isOperateur('(')">
+	<input type="button" value=")">
+	<input type="button" value="M">
+	<input type="button" value="RM">
+	<input type="button" value="Off">
+	<br/>
+	<input type="button" value="<-">
+	<input type="button" value="CE">
+	<input type="button" value="C">
+	<input type="button" value="+-">
+	<input type="button" value="&radic;x">
+	<br/>
+	<input type="button" value="7">
+	<input type="button" value="8">
+	<input type="button" value="9">
+	<input type="button" value="/">
+	<input type="button" value="%">
+	<br/>
+	<input type="button" value="4">
+	<input type="button" value="5">
+	<input type="button" value="6">
+	<input type="button" value="*">
+	<input type="button" value="1/x">
+	<br/>
+    <input type="button" value="1">
+    <input type="button" value="2">
+    <input type="button" value="3">
+    <input type="button" value="-">
+	
+	<br/>
+    <input type="button" value="0">
+    <input type="button" value="=">
+
+
+</div>
+	
+</div>
+
+</body>
+
+</html> 

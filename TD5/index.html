@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html ng-app="MainModule">
+<head>
+<base href="/TD5/"/>
+<meta charset="UTF-8">
+<title>Index</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.1/angular.min.js"></script>
+<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.3.10/angular-route.min.js"></script>
+<script src="app/MainModule.js"></script>
+<script src="app/routing.js"></script>
+<script src="app/AuthModule.js"></script>
+<script src="app/services/AuthService.js"></script>
+<script src="app/services/DAOService.js"></script>
+<script src="app/MainController.js"></script>
+<script src="app/InController.js"></script>
+<script src="app/ClientsController.js"></script>
+<script src="app/ProductsController.js"></script>
+</head>
+
+<a href="login">Login</a><br/>
+<a href="about">About</a><br/>
+<div ng-view></div>
+
+</body>
+
+</html> 

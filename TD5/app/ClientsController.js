@@ -5,4 +5,5 @@ angular.module("MainModule").controller("ClientsController", ["DAOService", func
 	self.clients = daoservice.clients;
 	
 	
+	
 }]);

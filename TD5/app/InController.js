@@ -1,8 +1,9 @@
-angular.module("MainModule").controller("InController", ["AuthService",function($authservice){
+angular.module("AuthModule").controller("InController", ["AuthService",function($authservice){
     
-	self = this;
+	var self = this;
 	
 	this.authService = $authservice;
+	
 	
 
 	

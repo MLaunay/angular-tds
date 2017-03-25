@@ -1,0 +1,23 @@
+<h1>Mes projets</h1>
+<div ng-repeat="item in myProjectsCtrl.projectsOwner">
+	<h2><a ng-href="project/{{item._id.$oid}}">{{item.name}}</a></h2>
+	<p>{{item.descriptif}}</p>
+	
+	<div ng-repeat ="item2 in myProjectsCtrl.daoService.getProjectStories(item._id.$oid)">
+		{{item2.code}}
+	</div>
+	<p>{{item.owner.identity}}</p>
+	
+
+</div>
+
+
+<h1>Mes participations</h1>
+<div ng-repeat ="item in myProjectsCtrl.projectsWorker">
+	<h2><a ng-href="project/{{item._id.$oid}}">{{item.name}}</a></h2>
+	<p>{{item.descriptif}}</p>
+	<div ng-repeat ="item2 in myProjectsCtrl.daoService.getProjectStories(item._id.$oid)">
+		{{item2.code}}
+	</div>
+	<p>{{item.owner.identity}}</p>
+</div>

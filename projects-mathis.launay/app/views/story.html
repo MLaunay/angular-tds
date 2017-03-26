@@ -8,7 +8,7 @@
 <div ng-repeat="tag in storyCtrl.getStory().tags" >
 	<div class="ui small label" ng-style="{'background-color' : tag.color }">{{tag.title}}</div>
 </div>
-<div><i class="user icon"></i>{{storyCtrl.getStory().project.owner.identity}}</div>
+<div><i class="user icon"></i>{{storyCtrl.getStory().developer.identity}}</div>
 <div style="color:green;"  ng-show="storyCtrl.StoryComplete()"><i class="tasks icon"></i>Done</div>
 <div>{{storyCtrl.getStory().descriptif}}</div>
 

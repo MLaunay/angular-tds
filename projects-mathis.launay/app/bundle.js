@@ -3,7 +3,7 @@ angular.module("AppProject",["ngRoute"])
 .config(require("./config"))
 .controller("myProjectsController",["daoService",require("./controllers/myProjects")])
 .controller("projectController",["daoService","$routeParams",require("./controllers/project")])
-.controller("storyController",[require("./controllers/story")])
+.controller("storyController",["daoService","$routeParams",require("./controllers/story")])
 .service("daoService",[require("./services/daoService")]);
 //$('#dd').dropdown()
 //ui dropdown, ui items
@@ -63,15 +63,122 @@ module.exports = function($daoService,routeParams){
 	console.log($daoService.getProjectStories(routeParams._id));
 	self.dev;
 	
+	self._stories = $daoService.getProjectStories(routeParams._id);
+	
+	console.log(self._stories);
+	self.isStoryCompleted = function(_idStory){
+    var result = false;
+    for(var i=0; i < self._stories.length; i++){
+
+        if (self._stories[i]._id.$oid == _idStory) {
+            var tasks = self._stories[i].tasks;
+            if(tasks.length== 0){
+                result = true;
+            }
+            else {
+
+                result = true;
+                for (var j = 0; j < tasks.length; j++) {
+                    if (tasks[j].closed == false)
+                        result=false;
+                }
+            }
+        }
+    }
+    return result;
+}
+	
 	self.setDev = function(dev,story){
+		console.log(self._stories);
+		var i = 0;
+		while (i< self._stories.length && self._stories[i]._id.$oid != story._id.$oid){
+				i++;
+			
+		}
 		
-		
+		if(self._stories[i]._id.$oid == story._id.$oid){
+			self._stories[i]["developer"] = dev;
+		}
 	};
 	
 }; 
 },{}],5:[function(require,module,exports){
-module.exports = function(routeParams){
+module.exports = function($daoService,routeParams){
+	$(function () {
+	 	$('.ui.dropdown').dropdown();
+	});
 	var self = this;
+	self.stories = $daoService.getStories()._embedded;
+	
+	self.getStory = function(){
+		var i = 0;
+		while(i < self.stories.length && self.stories[i]._id.$oid != routeParams._id){
+				i++;
+		}
+		if(self.stories[i]._id.$oid == routeParams._id){
+				return self.stories[i];
+		}
+	
+	};
+	
+	
+	self.devs = $daoService.getDevs();
+	
+	self.tags = $daoService.getTags();
+	
+	self.story = self.getStory();
+
+	
+	self.StoryComplete = function(){
+		var cpt = 0;
+
+		for(var i = 0; i<self.story.tasks.length;i++){
+			if(self.story.tasks[i].closed != undefined){
+				if(self.story.tasks[i].closed == true){
+					cpt++;
+				}	
+			}
+			
+		}
+		
+		if(cpt == self.story.tasks.length){
+			return true;
+		}
+	};
+	
+	self.setDev = function(dev){
+		self.story["developer"] = dev;
+		
+		
+	};
+	
+	self.toggleDone = function(task){
+		var i =0;
+		while (i< self.story.length && self.story.tasks[i] != task){
+				i++;
+			
+		}
+		
+		if(self.story.tasks[i] == task){
+			self.story.tasks[i]["closed"] = !self.story.tasks[i]["closed"];
+		}
+		
+	};
+	
+	self.indexofTag = function(tag){
+		console.log(self.story.tags.indexOf(tag));
+		return self.story.tags.indexOf(tag);
+		
+	};
+	
+	self.toggleTag = function(tag){
+		self.story.tags.push(tag);
+		
+	};
+	
+	
+	
+	
 };   
 	
 	

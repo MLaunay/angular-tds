@@ -1,23 +1,65 @@
 <h1>Mes projets</h1>
+
 <div ng-repeat="item in myProjectsCtrl.projectsOwner">
-	<h2><a ng-href="project/{{item._id.$oid}}">{{item.name}}</a></h2>
-	<p>{{item.descriptif}}</p>
+	<div class="ui items">
+		<div class="item">
+			<div class="image">
+				<img src="https://semantic-ui.com/images/wireframe/image.png">
+			</div>
+		<div class="content">
+			<a class="header"><h2><a ng-href="project/{{item._id.$oid}}">{{item.name}}</a></h2></a>
+				<div class="meta">
+					<span><p>{{item.descriptif}}</p></span>
+				</div>
+			<div class="description">
+			<div ng-repeat ="item2 in myProjectsCtrl.daoService.getProjectStories(item._id.$oid)">
+				<a class="ui medium label">{{item2.code}}</a>
+			</div>
+      </div>
+      <div class="extra">
+        <p>{{item.owner.identity}}</p>
+      </div>
+    </div>
+  </div>
 	
-	<div ng-repeat ="item2 in myProjectsCtrl.daoService.getProjectStories(item._id.$oid)">
-		{{item2.code}}
-	</div>
-	<p>{{item.owner.identity}}</p>
+	
+	
+	
+	
+	
 	
 
 </div>
-
+</div>
 
 <h1>Mes participations</h1>
 <div ng-repeat ="item in myProjectsCtrl.projectsWorker">
-	<h2><a ng-href="project/{{item._id.$oid}}">{{item.name}}</a></h2>
-	<p>{{item.descriptif}}</p>
-	<div ng-repeat ="item2 in myProjectsCtrl.daoService.getProjectStories(item._id.$oid)">
-		{{item2.code}}
-	</div>
-	<p>{{item.owner.identity}}</p>
+
+	<div class="ui items">
+  <div class="item">
+    <div class="image">
+      <img src="https://semantic-ui.com/images/wireframe/image.png">
+    </div>
+    <div class="content">
+      <a class="header"><h2><a ng-href="project/{{item._id.$oid}}">{{item.name}}</a></h2></a>
+      <div class="meta">
+        <span><p>{{item.descriptif}}</p></span>
+      </div>
+      <div class="description">
+        <div ng-repeat ="item2 in myProjectsCtrl.daoService.getProjectStories(item._id.$oid)">
+			<a class="ui medium label">{{item2.code}}</a>
+		</div>
+      </div>
+      <div class="extra">
+		<p>{{item.owner.identity}}</p>
+      </div>
+    </div>
+  </div>
+
+	
+	
+	
+	
+	
+	
 </div>

@@ -1,1 +1,39 @@
-<h1>Stories</h1>
+<h3 style="color:red;">{{storyCtrl.getStory().code}}</h3> 
+<div class="ui black circular label">{{storyCtrl.getStory().tasks.length}}<ng-pluralize count="storyCtrl.getStory().tasks.length"
+                when="{'0': ' tâche',
+                       '1': ' tâche',
+                       'other': ' tâches'}">
+		</ng-pluralize></div>
+		
+<div ng-repeat="tag in storyCtrl.getStory().tags" >
+	<div class="ui small label" ng-style="{'background-color' : tag.color }">{{tag.title}}</div>
+</div>
+<div><i class="user icon"></i>{{storyCtrl.getStory().project.owner.identity}}</div>
+<div style="color:green;"  ng-show="storyCtrl.StoryComplete()"><i class="tasks icon"></i>Done</div>
+<div>{{storyCtrl.getStory().descriptif}}</div>
+
+<div ng-repeat="task in storyCtrl.getStory().tasks">
+	<div class="ui checkbox">
+		<input type="checkbox" name="example" ng-checked="task.closed" ng-click="storyCtrl.toggleDone(task)">
+		<label ng-class="task.closed ? 'barre' : ''">{{task.content}}</label>
+	</div>
+</div>
+	<div class="ui selection dropdown">
+  							<input type="hidden" name="dev">
+							<i class="dropdown icon"></i>
+							<div class="text">{{storyCtrl.getStory().developer.identity || "Select dev..."}}</div>
+  							<div class="menu">
+  								<div class="item" ng-class="storyCtrl.getStory().developer.identity != '' ? '' : 'active selected'" >Select dev...</div>
+    							<div class="item" ng-repeat="dev in storyCtrl.devs._embedded" data-value="{{$index}}" ng-class="dev.identity == storyCtrl.getStory().developer.identity ? 'active selected' : ''" ng-click="storyCtrl.setDev(dev)">{{dev.identity}}</div>
+  							</div>
+							</div>
+	<div class="ui selection dropdown">
+  							<input type="hidden" name="dev">
+							<i class="dropdown icon"></i>
+							<div class="text">{{storyCtrl.tags.identity || "Ajouter/retirer tag..."}}</div>
+  							<div class="menu">
+  								<div class="item" ng-class="storyCtrl.tags.title != '' ? '' : 'active selected'" >Ajouter/retirer tag...</div>
+    							<div class="item" ng-repeat="tag in storyCtrl.tags._embedded" data-value="{{$index}}" ng-class="tags.title == storyCtrl.getStory().tags.title ? 'active selected' : ''" ng-click="storyCtrl.toggleTag(tag)"><div class="ui small label " ng-style="{'background-color' : tag.color }">{{tag.title}}</div></div>
+  							</div>
+							</div>
+	<a class="ui primary button" ng-href="project/{{storyCtrl.getStory().project._id.$oid}}">Retour aux stories</a>

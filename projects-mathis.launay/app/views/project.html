@@ -2,30 +2,29 @@
 <div>
 <h2>{{projectCtrl.project.name}}</h1>
 <p>{{projectCtrl.project.descriptif}}</p>
-<table>
+<table class="ui celled padded table">
 	<thead>
-	<th>Stories</th>
+	<th><i class="user icon"></i>Stories</th>
 	<th>Tasks</th>
 	<th>Done ?</th>
 	<th>Developper</th>
 	</thead>
 	
 	<tbody ng-repeat="story in projectCtrl.daoService.getProjectStories(projectCtrl.params._id)">
-		<td>{{story.code}} {{story.descriptif}}</td>
-		<td>{{story.tasks.length}}</td>
-		<td>{{story.tasks.closed}}</td>
+		<tr><td>{{story.code}} {{story.descriptif}} <a class="ui button" ng-href="story/{{story._id.$oid}}"><i class="edit icon"></i></a></td>
+		<td><a class="ui orange circular label">{{story.tasks.length}}</a></td>
+		<td><i ng-class="projectCtrl.isStoryCompleted(story._id.$oid) == true ? 'check circle outline icon' : ''"></i></td>
 		
 		<td><div class="ui selection dropdown">
   							<input type="hidden" name="dev">
 							<i class="dropdown icon"></i>
 							<div class="text">{{story.developer.identity || "Select dev..."}}</div>
   							<div class="menu">
-  								<div class="item" ng-class="story.developer._id.$oid ? '' : 'active selected'" ng-click="projectCtrl.removeDev(story)">Select dev...</div>
+  								<div class="item" ng-class="story.developer._id.$oid ? '' : 'active selected'">Select dev...</div>
     							<div class="item" ng-repeat="dev in projectCtrl.devs" data-value="{{$index}}" ng-class="dev._id.$oid == story.developer._id.$oid ? 'active selected' : ''" ng-click="projectCtrl.setDev(dev,story)">{{dev.identity}}</div>
   							</div>
 						</div>
-		</td>
+		</td></tr>
 	</tbody>
 </table>
-
 </div>

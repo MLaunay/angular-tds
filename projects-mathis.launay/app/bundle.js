@@ -51,6 +51,9 @@ module.exports = function($daoService){
 
 },{}],4:[function(require,module,exports){
 module.exports = function($daoService,routeParams){
+	$(function () {
+	 	$('.ui.dropdown').dropdown();
+	});
 	var self = this;
 	self.daoService = $daoService;
 	

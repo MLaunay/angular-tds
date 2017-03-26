@@ -14,9 +14,16 @@
 		<td>{{story.code}} {{story.descriptif}}</td>
 		<td>{{story.tasks.length}}</td>
 		<td>{{story.tasks.closed}}</td>
-		<td><select ng-options="v.identity for (k,v) in projectCtrl.devs" ng-model="projectCtrl.dev">
-			<option>{{story.developer.identity}}</option>
-		</select>
+		
+		<td><div class="ui selection dropdown">
+  							<input type="hidden" name="dev">
+							<i class="dropdown icon"></i>
+							<div class="text">{{story.developer.identity || "Select dev..."}}</div>
+  							<div class="menu">
+  								<div class="item" ng-class="story.developer._id.$oid ? '' : 'active selected'" ng-click="projectCtrl.removeDev(story)">Select dev...</div>
+    							<div class="item" ng-repeat="dev in projectCtrl.devs" data-value="{{$index}}" ng-class="dev._id.$oid == story.developer._id.$oid ? 'active selected' : ''" ng-click="projectCtrl.setDev(dev,story)">{{dev.identity}}</div>
+  							</div>
+						</div>
 		</td>
 	</tbody>
 </table>

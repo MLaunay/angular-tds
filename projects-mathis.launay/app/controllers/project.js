@@ -1,4 +1,7 @@
 module.exports = function($daoService,routeParams){
+	$(function () {
+	 	$('.ui.dropdown').dropdown();
+	});
 	var self = this;
 	self.daoService = $daoService;
 	

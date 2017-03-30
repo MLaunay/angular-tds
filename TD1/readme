@@ -1,4 +1,4 @@
-# Présentation
+Présentation
 
 Ce module permet de saisir un message de l'enregistrer grâce aux cookies en Angular JS, ce module décompte le nombre de caractères rentrés 
 à la manière de la zone de saisie des tweets sur Twitter.
